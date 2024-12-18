@@ -30,7 +30,7 @@ function App() {
           ref={cameraRef} // Use ref for controlling the camera
           far={4000}
           fov={95.115}
-          position={[1.5, 0, 0]} // Adjusted position
+          position={[8.5, 0, 0]} // Adjusted position
           rotation={[-0.02, 0.1, 0]} // Adjusted rotation
         />
         <OrbitControls camera={cameraRef.current} enableZoom={true} />
