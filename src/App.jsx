@@ -21,6 +21,19 @@ function App() {
         {/* Camera Controls */}
         <OrbitControls enableZoom={true} />
       </Canvas>
+      <p
+        style={{
+          position: "absolute",
+          bottom: "10px",
+          right: "10px",
+          zIndex: 99999,
+          color: "white",
+          fontWeight: "600",
+          padding: "1px 10px",
+        }}
+      >
+        Drag And move to explore.
+      </p>
     </>
   );
 }
