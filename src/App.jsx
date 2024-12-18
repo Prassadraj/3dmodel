@@ -1,16 +1,22 @@
-import { Suspense } from "react";
+import { Suspense, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Environment } from "@react-three/drei";
-
-import Model from "./Model";
+import {
+  OrbitControls,
+  Environment,
+  PerspectiveCamera,
+} from "@react-three/drei";
+import Model from "./Model"; // Import Model component
 import "./App.css";
+
 function App() {
+  const cameraRef = useRef();
+
   return (
     <>
       <Canvas style={{ cursor: "pointer", height: "100vh", width: "100%" }}>
         {/* Lighting */}
         <ambientLight intensity={0.5} />
-        <directionalLight position={[10, 10, 5]} intensity={1} />
+        <directionalLight position={[40, 10, 5]} intensity={1} />
 
         {/* Load 3D Model */}
         <Suspense fallback={null}>
@@ -18,8 +24,16 @@ function App() {
           <Environment preset="sunset" background />
         </Suspense>
 
-        {/* Camera Controls */}
-        <OrbitControls enableZoom={true} />
+        {/* Camera and OrbitControls */}
+        <PerspectiveCamera
+          makeDefault={true}
+          ref={cameraRef} // Use ref for controlling the camera
+          far={4000}
+          fov={95.115}
+          position={[1.5, 0, 0]} // Adjusted position
+          rotation={[-0.02, 0.1, 0]} // Adjusted rotation
+        />
+        <OrbitControls camera={cameraRef.current} enableZoom={true} />
       </Canvas>
       <p
         style={{
