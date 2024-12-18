@@ -33,7 +33,7 @@ function App() {
           position={[8.5, 0, 0]} // Adjusted position
           rotation={[-0.02, 0.1, 0]} // Adjusted rotation
         />
-        <OrbitControls camera={cameraRef.current} enableZoom={true} />
+        <OrbitControls camera={cameraRef.current} enableZoom={false} />
       </Canvas>
       <p
         style={{
