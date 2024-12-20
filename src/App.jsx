@@ -5,43 +5,53 @@ import {
   Environment,
   PerspectiveCamera,
 } from "@react-three/drei";
-import Model from "./Model"; // Import Model component
-import "./App.css";
+import { AmbientLight } from "three";
+import Christmas from "./component/Christmas";
 
 function App() {
   const cameraRef = useRef();
 
   return (
     <>
-      <Canvas style={{ cursor: "pointer", height: "100vh", width: "100%" }}>
+      <Canvas
+        style={{
+          cursor: "pointer",
+          height: "100vh",
+          paddingTop: "80px",
+
+          width: "100%",
+          display: "block", // Ensures canvas fills the screen without extra space
+        }}
+      >
         {/* Lighting */}
         <ambientLight intensity={0.5} />
-        <directionalLight position={[40, 10, 5]} intensity={1} />
+        <directionalLight intensity={1} position={[5, 5, 5]} />
 
         {/* Load 3D Model */}
         <Suspense fallback={null}>
-          <Model />
-          <Environment preset="sunset" background />
+          <Christmas />
+          <Environment preset="sunset" />
         </Suspense>
 
-        {/* Camera and OrbitControls */}
+        {/* Adjusted Camera settings for proper zoom */}
         <PerspectiveCamera
-          makeDefault={true}
-          ref={cameraRef} // Use ref for controlling the camera
-          far={4000}
-          fov={95.115}
-          position={[8.5, 0, 0]} // Adjusted position
-          rotation={[-0.02, 0.1, 0]} // Adjusted rotation
+          makeDefault
+          position={[104, 190, 310]}
+          fov={75}
+          ref={cameraRef}
         />
-        <OrbitControls camera={cameraRef.current} enableZoom={false} />
+
+        {/* Orbit Controls with distance limits */}
+        <OrbitControls minDistance={200} maxDistance={400} />
       </Canvas>
+
       <p
         style={{
           position: "absolute",
           bottom: "10px",
           right: "10px",
           zIndex: 99999,
-          color: "white",
+          color: "black",
           fontWeight: "600",
           padding: "1px 10px",
         }}
